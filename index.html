@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agente de IA no WhatsApp: como criar o seu | AGENTE WPP</title>
+<meta name="description" content="A Centauro colocou 900 agentes de IA. Sua empresa precisa de só 1. Aprenda, passo a passo, a criar um agente que atende e vende no seu WhatsApp 24 horas por dia.">
+<meta name="theme-color" content="#F4F4F1">
+<!-- Open Graph: troque [SEU_DOMINIO] pelo endereço onde a página vai ficar -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="A Centauro colocou 900 agentes de IA. Sua empresa precisa de só 1.">
+<meta property="og:description" content="Passo a passo para criar um agente de IA que atende e vende no seu WhatsApp, mesmo sem saber programar.">
+<meta property="og:image" content="https://jotapeolvrr-spec.github.io/agenteiawpp/og-agente-wpp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://jotapeolvrr-spec.github.io/agenteiawpp/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://jotapeolvrr-spec.github.io/agenteiawpp/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,700;14..32,800;14..32,900&family=VT323&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F4F4F1; --ink:#121212; --red:#E3202A; --gray:#8B8B88; --muted:#5F5F5C;
+  --card:#FFFFFF; --line:rgba(18,18,18,.08); --wa:#25D366; --wa-ink:#06301A;
+  --r:36px; --shadow:0 1px 2px rgba(18,18,18,.04),0 12px 32px -12px rgba(18,18,18,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter Display','Inter',system-ui,-apple-system,sans-serif;font-optical-sizing:auto;
+  color:var(--ink);background-color:var(--bg);line-height:1.55;font-size:17px;
+  background-image:
+    linear-gradient(rgba(18,18,18,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(18,18,18,.05) 1px,transparent 1px);
+  background-size:44px 44px;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:10px;z-index:99}
+.skip:focus{left:8px}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 22px}
+section{padding:72px 0}
+.mono{font-family:'VT323',ui-monospace,monospace;letter-spacing:.04em}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.kicker:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+
+/* Tipografia editorial: palavras pequenas regulares + palavras-chave gigantes vermelhas */
+.ed{font-weight:400;font-size:clamp(26px,6.6vw,44px);line-height:1.08;letter-spacing:-.025em}
+.ed b{margin:0 .05em;font-weight:900;color:var(--red);text-transform:uppercase;font-size:1.9em;line-height:.9;letter-spacing:-.04em;display:inline-block}
+.ed strong{font-weight:800}
+.lead{font-size:clamp(17px,4.4vw,20px);color:#2A2A28;margin-top:18px;max-width:34em}
+.small{font-size:13px;color:var(--muted)}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;border-radius:999px;font-weight:800;font-size:17px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+.btn:active{transform:scale(.98)}
+.btn-dark{background:var(--ink);color:#fff;box-shadow:0 10px 24px -10px rgba(18,18,18,.6)}
+.btn-wa{background:var(--wa);color:var(--wa-ink);width:100%;min-height:64px;font-size:clamp(15px,4.2vw,18px);padding:0 18px;white-space:nowrap;box-shadow:0 14px 30px -12px rgba(37,211,102,.75)}
+.btn-wa svg{width:24px;height:24px;flex-shrink:0}
+.link{font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;text-decoration-color:var(--red)}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:96px 0 72px}
+.vhs{position:absolute;font-size:30px;color:var(--ink);opacity:.82;line-height:1}
+.vhs.tl{top:22px;left:22px}.vhs.tr{top:22px;right:22px}.vhs.bl{bottom:22px;left:22px}.vhs.br{bottom:22px;right:22px;color:var(--red)}
+.rec{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);margin-right:6px;vertical-align:middle;animation:blink 1.2s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero h1{margin-top:22px}
+.hero .ctas{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-top:34px}
+
+/* Cards */
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:28px}
+.grid{display:grid;gap:14px}
+.stat .n{font-weight:900;color:var(--red);font-size:clamp(52px,15vw,76px);line-height:.95;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.stat .n small{font-size:.5em;letter-spacing:-.02em}
+.stat p{margin-top:8px;font-weight:500}
+.stat.wide .n{font-size:clamp(40px,11vw,60px)}
+.source{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.5}
+
+/* Virada */
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:30px}
+.opt{border-radius:24px;background:var(--card);box-shadow:var(--shadow);padding:20px 10px;text-align:center;font-weight:800;font-size:15px;color:var(--gray);position:relative}
+.opt .ic{font-size:26px;display:block;margin-bottom:8px;filter:grayscale(1);opacity:.55}
+.opt.on{background:var(--ink);color:#fff;transform:translateY(-8px) scale(1.04);box-shadow:0 22px 40px -16px rgba(227,32,42,.55)}
+.opt.on .ic{filter:none;opacity:1}
+.opt.on:after{content:"é onde a maioria das empresas falha";position:absolute;left:50%;top:calc(100% + 14px);transform:translateX(-50%);width:200px;font-size:13px;font-weight:700;color:var(--red);line-height:1.3}
+.gargalo{margin-top:74px}
+.gargalo p+p{margin-top:8px}
+
+/* Tutorial / timeline */
+.steps{position:relative;margin-top:36px;list-style:none}
+.steps:before{content:"";position:absolute;left:23px;top:8px;bottom:8px;width:2px;background:repeating-linear-gradient(var(--red) 0 6px,transparent 6px 12px);opacity:.5}
+.step{position:relative;padding-left:66px;margin-bottom:36px}
+.step .num{position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:var(--red);color:#fff;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px var(--bg)}
+.step h3{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.2;padding-top:10px}
+.step>p{margin-top:8px}
+.ex{margin-top:14px;padding:20px 22px;border-radius:24px}
+.ex .tag{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:6px}
+.ex ul{padding-left:18px}.ex li{margin:3px 0}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tools span{font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:rgba(255,255,255,.6)}
+.tools span:first-child{border-color:transparent;background:none;padding-left:0;color:var(--muted)}
+.code{position:relative;margin-top:14px;background:#121212;color:#EDEDEA;border-radius:24px;padding:20px 18px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.6;max-height:360px;overflow:auto;white-space:pre-wrap}
+.code .hl{color:#FF8A8F}
+.copy{position:sticky;top:0;float:right;margin:-6px -4px 8px 8px;background:var(--red);color:#fff;border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
+.warn{margin-top:12px;padding:14px 18px;border-left:4px solid var(--red);background:rgba(227,32,42,.06);border-radius:0 16px 16px 0;font-size:15px}
+
+/* Checklist */
+.check h3{font-size:22px;font-weight:800}
+.bar{height:10px;border-radius:99px;background:#EAEAE6;margin:14px 0 6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--red);border-radius:99px;transition:width .4s ease}
+.check ul{list-style:none;margin-top:14px}
+.check label{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);cursor:pointer;font-weight:600}
+.check input{appearance:none;-webkit-appearance:none;flex-shrink:0;width:26px;height:26px;border-radius:8px;border:2px solid var(--ink);display:grid;place-content:center;margin-top:1px;cursor:pointer;background:#fff}
+.check input:checked{background:var(--red);border-color:var(--red)}
+.check input:checked:after{content:"";width:12px;height:7px;border:3px solid #fff;border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+.check input:checked+span{text-decoration:line-through;color:var(--muted)}
+
+/* Ninguém conta */
+.pains{grid-template-columns:1fr 1fr}
+.pain{padding:22px;border-radius:28px}
+.pain .ic{font-size:24px}
+.pain h4{font-size:16px;font-weight:800;margin-top:8px;line-height:1.25}
+.pain p{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.45}
+.quote{margin-top:22px;font-size:20px;font-weight:700;letter-spacing:-.01em}
+.quote em{font-style:normal;color:var(--red)}
+
+/* Oferta */
+.offer{background:var(--ink);color:#F4F4F1;border-radius:44px;padding:44px 20px;position:relative;overflow:hidden}
+.offer:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+.offer>*{position:relative}
+.offer .ed{color:#fff}
+.offer .eyebrow{color:#A9A9A5}
+.offer .lead{color:#D6D6D2}
+.benefits{list-style:none;margin-top:26px;display:grid;gap:10px}
+.benefits li{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:14px 16px;font-weight:600}
+.benefits .bi{width:40px;height:40px;border-radius:12px;background:var(--red);display:grid;place-content:center;flex-shrink:0;font-size:19px}
+.how{margin-top:34px;display:grid;gap:10px;counter-reset:h}
+.how div{display:flex;gap:16px;align-items:center}
+.how b{font-weight:900;font-size:44px;color:var(--red);line-height:1;min-width:36px}
+.how span{font-weight:600}
+.me{display:flex;gap:18px;align-items:center;margin-top:36px;padding:18px;border-radius:28px;background:rgba(255,255,255,.06)}
+.me img{width:88px;height:88px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--red)}
+.me strong{display:block;font-size:17px}
+.me span{font-size:14px;color:#C9C9C5;display:block;margin-top:4px;line-height:1.45}
+.price{margin-top:30px;text-align:center}
+.price .p{font-size:15px;color:#BDBDB9}
+.price .v{font-weight:900;font-size:40px;letter-spacing:-.03em;color:#fff}
+.micro{margin-top:12px;text-align:center;font-size:14px;color:#BDBDB9}
+
+/* FAQ */
+details{background:var(--card);border-radius:24px;box-shadow:var(--shadow);margin-top:10px}
+summary{list-style:none;cursor:pointer;padding:20px 56px 20px 22px;font-weight:800;font-size:17px;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:26px;font-weight:500;color:var(--red);transition:transform .2s}
+details[open] summary:after{transform:translateY(-50%) rotate(45deg)}
+details p{padding:0 22px 22px;color:#33332F}
+
+footer{padding:40px 0 120px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer a{font-weight:700}
+footer p+p{margin-top:6px}
+
+/* WhatsApp flutuante */
+.float{position:fixed;left:16px;right:16px;bottom:max(16px,env(safe-area-inset-bottom));z-index:50;transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.float.show{transform:none}
+.float .btn-wa{min-height:58px;font-size:16px}
+@media (min-width:820px){
+  .float{left:auto;right:24px;width:auto}
+  .float .btn-wa{width:auto;padding:0 26px}
+  .pains{grid-template-columns:repeat(3,1fr)}
+  .grid.stats{grid-template-columns:1fr 1fr}
+  .stat.wide{grid-column:1/-1}
+  .offer{padding:60px 56px}
+  section{padding:96px 0}
+}
+
+/* Animações */
+.w{display:inline-block;white-space:pre}
+.js .w{opacity:0;filter:blur(12px);transform:translateY(.15em);transition:opacity .6s ease,filter .6s ease,transform .6s ease}
+.js .in .w{opacity:1;filter:blur(0);transform:none}
+.js .rise{opacity:0;transform:translateY(28px) scale(.96);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .rise.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .w,.js .rise{opacity:1!important;filter:none!important;transform:none!important;transition:none!important}
+  .rec{animation:none}
+  .float{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#tutorial">Pular para o tutorial</a>
+
+<!-- ========== 1. HERO ========== -->
+<header class="hero" id="topo">
+  <span class="vhs tl mono" aria-hidden="true">PLAY ▶</span>
+  <span class="vhs tr mono" aria-hidden="true">LP</span>
+  <span class="vhs bl mono" aria-hidden="true"><span class="rec"></span>REC</span>
+  <span class="vhs br mono" aria-hidden="true" id="vhs-time">00:00:00</span>
+  <div class="wrap">
+    <span class="kicker">Você comentou AGENTE WPP. Aqui está.</span>
+    <h1 class="ed split">A Centauro colocou <b>900</b> agentes de IA. Sua empresa precisa de só <b>1.</b></h1>
+    <p class="lead">Aprenda a criar um agente que atende, responde e vende no seu WhatsApp 24 horas por dia, mesmo sem saber programar.</p>
+    <div class="ctas">
+      <a class="btn btn-dark" href="#tutorial">Quero aprender ↓</a>
+      <a class="link" href="#oferta">Prefiro que alguém faça por mim</a>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ========== 2. PROVA ========== -->
+<section id="prova" aria-labelledby="prova-t">
+  <div class="wrap">
+    <p class="eyebrow">O que a Centauro contou à Exame</p>
+    <h2 class="ed split" id="prova-t">Não é teoria. <b>Já</b> está rodando.</h2>
+    <div class="grid stats" style="margin-top:28px">
+      <div class="card stat rise"><div class="n"><span data-count="900">0</span>+</div><p>agentes de IA em operação</p></div>
+      <div class="card stat rise"><div class="n"><span data-count="60">0</span>%+</div><p>dos chamados de pós-venda resolvidos sem humano</p></div>
+      <div class="card stat rise"><div class="n"><span data-count="27">0</span>%</div><p>das conversas com o assistente de IA viraram venda <span class="small">(teste com cerca de 2.100 conversas)</span></p></div>
+      <div class="card stat rise"><div class="n">+<span data-count="46">0</span>%</div><p>de ticket médio no mesmo teste</p></div>
+      <div class="card stat wide rise"><div class="n"><span data-count="4">0</span><small>h</small> → <span data-count="5">0</span><small>min</small></div><p>para atualizar o estoque de 230 lojas</p></div>
+    </div>
+    <p class="source">Dados divulgados pela Centauro à Exame (11/11/2026). A Centauro não tem relação com este conteúdo.</p>
+  </div>
+</section>
+
+<!-- ========== 3. A VIRADA ========== -->
+<section id="virada" aria-labelledby="virada-t">
+  <div class="wrap">
+    <h2 class="ed split" id="virada-t">Você não precisa de 900 agentes. Precisa de <b>1</b> no lugar <strong>certo.</strong></h2>
+    <div class="opts rise" role="list">
+      <div class="opt" role="listitem"><span class="ic" aria-hidden="true">📦</span>Estoque</div>
+      <div class="opt on" role="listitem"><span class="ic" aria-hidden="true">💬</span>VENDAS</div>
+      <div class="opt" role="listitem"><span class="ic" aria-hidden="true">🎧</span>Atendimento</div>
+    </div>
+    <div class="gargalo card rise">
+      <p class="eyebrow" style="margin-bottom:8px">O que é um gargalo</p>
+      <p><strong>É o ponto onde o lead esfria esperando resposta.</strong></p>
+      <p>O cliente chama às 22h, você responde às 9h do dia seguinte. Nesse meio-tempo ele já comprou do concorrente.</p>
+      <p>Um agente colocado aí responde em segundos, de dia ou de madrugada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. TUTORIAL ========== -->
+<section id="tutorial" aria-labelledby="tut-t">
+  <div class="wrap">
+    <p class="eyebrow">Tutorial completo · 8 passos</p>
+    <h2 class="ed split" id="tut-t">Como criar seu <b>agente</b> de WhatsApp</h2>
+    <p class="lead">Siga na ordem. Cada passo tem um exemplo prático e as ferramentas que eu usaria.</p>
+
+    <ol class="steps">
+      <li class="step rise">
+        <span class="num" aria-hidden="true">1</span>
+        <h3>Mapeie o gargalo</h3>
+        <p>Antes de qualquer ferramenta, entenda o que chega. Liste as 20 perguntas que mais aparecem no seu WhatsApp e quanto tempo a equipe leva para responder cada uma.</p>
+        <div class="card ex"><span class="tag">Exemplo prático</span>
+          <ul><li>"Quanto custa?" · chega 40x/semana · resposta média: 3h</li><li>"Tem horário amanhã?" · 25x/semana · 5h</li><li>"Vocês atendem no meu bairro?" · 12x/semana · 1h</li></ul>
+          <p style="margin-top:8px">As perguntas mais repetidas e mais demoradas são o seu ponto de partida.</p>
+        </div>
+        <div class="tools"><span>Ferramentas:</span><span>Planilha</span><span>Exportar conversas do WhatsApp</span></div>
+      </li>
+
+      <li class="step rise">
+        <span class="num" aria-hidden="true">2</span>
+        <h3>Escreva o "manual do agente"</h3>
+        <p>É o prompt de sistema: quem o agente é, como fala, o que pode e o que não pode responder e quando chamar um humano. Use o modelo abaixo e troque o que está entre chaves.</p>
+        <pre class="code" id="prompt"><button class="copy" type="button" data-copy="prompt">Copiar</button>Você é <span class="hl">{NOME_DO_AGENTE}</span>, assistente da <span class="hl">{NOME_DA_EMPRESA}</span>, que <span class="hl">{O_QUE_A_EMPRESA_FAZ}</span> em <span class="hl">{CIDADE}</span>.
+
+OBJETIVO
+Responder rápido, tirar dúvidas e levar o cliente até <span class="hl">{AÇÃO_FINAL: agendar | fazer pedido | pedir orçamento}</span>.
+
+TOM DE VOZ
+- Cordial, direto e humano. Frases curtas.
+- Trate o cliente pelo nome quando souber.
+- No máximo 1 emoji por mensagem.
+
+O QUE VOCÊ PODE FAZER
+- Responder usando SOMENTE a base de conhecimento.
+- Informar preços, horários, formas de pagamento e prazos que estão na base.
+- Coletar: nome, bairro, o que o cliente precisa e melhor horário.
+
+O QUE VOCÊ NÃO PODE FAZER
+- Inventar preço, prazo, desconto ou condição.
+- Prometer resultado.
+- Falar de concorrentes ou de assuntos fora da empresa.
+- Se não souber: "Vou confirmar com a equipe e já te respondo."
+
+QUANDO PASSAR PARA UM HUMANO
+- O cliente pedir para falar com uma pessoa.
+- Reclamação, cliente irritado ou problema com pedido.
+- Pedido fechado ou orçamento acima de R$ <span class="hl">{VALOR_X}</span>.
+- Qualquer pergunta que não está na base.
+Nesses casos responda: "Vou te passar para <span class="hl">{NOME_DO_RESPONSÁVEL}</span>, um minuto." e marque a conversa como TRANSFERIR.
+
+FORMATO
+- Mensagens de até 3 linhas.
+- Termine sempre com uma pergunta que leve ao próximo passo.</pre>
+        <div class="tools"><span>Ferramentas:</span><span>Google Docs</span><span>Claude</span><span>ChatGPT</span></div>
+      </li>
+
+      <li class="step rise">
+        <span class="num" aria-hidden="true">3</span>
+        <h3>Monte a base de conhecimento</h3>
+        <p>O agente só é tão bom quanto o que você ensina. Junte num documento só tudo que um atendente novo precisaria saber.</p>
+        <div class="card ex"><span class="tag">Exemplo prático</span>
+          <ul><li>FAQ com as 20 perguntas do passo 1, já respondidas</li><li>Catálogo ou lista de serviços com preços</li><li>Horários, endereço e área de atendimento</li><li>Formas de pagamento e política de troca ou cancelamento</li></ul>
+        </div>
+        <div class="tools"><span>Ferramentas:</span><span>Google Docs</span><span>Notion</span></div>
+      </li>
+
+      <li class="step rise">
+        <span class="num" aria-hidden="true">4</span>
+        <h3>Conecte o WhatsApp</h3>
+        <p>Você tem dois caminhos: a <strong>API oficial da Meta</strong> (WhatsApp Cloud API), direto ou por um provedor oficial (BSP), ou soluções não oficiais que leem o WhatsApp Web.</p>
+        <div class="warn"><strong>A diferença:</strong> a API oficial é aprovada pela Meta e estável. As não oficiais são mais baratas e rápidas de ligar, mas podem levar ao <strong>bloqueio do seu número</strong>. Para o número principal da empresa, use a oficial.</div>
+        <div class="tools"><span>Ferramentas:</span><span>WhatsApp Cloud API</span><span>Provedor oficial (BSP)</span></div>
+      </li>
+
+      <li class="step rise">
+        <span class="num" aria-hidden="true">5</span>
+        <h3>Ligue tudo num orquestrador</h3>
+        <p>O orquestrador é o "cérebro" que conecta as peças. O fluxo básico é sempre o mesmo:</p>
+        <div class="card ex"><span class="tag">Fluxo do agente</span>
+          <p><strong>Chegou mensagem</strong> → a IA consulta a base → <strong>responde</strong> → registra o lead (nome, telefone, interesse) na planilha ou no CRM.</p>
+        </div>
+        <div class="tools"><span>Ferramentas:</span><span>n8n</span><span>Make</span><span>Claude</span><span>GPT</span></div>
+      </li>
+
+      <li class="step rise">
+        <span class="num" aria-hidden="true">6</span>
+        <h3>Crie as regras de transferência</h3>
+        <p>Um bom agente sabe a hora de sair de cena. Configure gatilhos que avisam um humano na hora:</p>
+        <div class="card ex"><span class="tag">Gatilhos</span>
+          <ul><li>Palavra-chave: "atendente", "humano", "falar com alguém"</li><li>Reclamação ou tom negativo</li><li>Pedido fechado, pronto para pagamento</li><li>Valor acima de R$ X</li></ul>
+        </div>
+        <div class="tools"><span>Ferramentas:</span><span>n8n</span><span>Make</span><span>Notificação no WhatsApp da equipe</span></div>
+      </li>
+
+      <li class="step rise">
+        <span class="num" aria-hidden="true">7</span>
+        <h3>Teste com 30 conversas reais</h3>
+        <p>Antes de ligar para todos os clientes, pegue 30 conversas antigas e simule. Anote cada resposta errada, ajuste o manual ou a base e teste de novo.</p>
+        <div class="card ex"><span class="tag">Exemplo prático</span>
+          <p>Ligue o agente primeiro só fora do horário comercial. Se ele for bem por uma semana, amplie.</p>
+        </div>
+      </li>
+
+      <li class="step rise">
+        <span class="num" aria-hidden="true">8</span>
+        <h3>Meça</h3>
+        <p>O que não é medido não melhora. Acompanhe toda semana:</p>
+        <div class="card ex"><span class="tag">4 números</span>
+          <ul><li>% de conversas resolvidas sem humano</li><li>Tempo da primeira resposta</li><li>Conversão em venda ou agendamento</li><li>Custo por conversa</li></ul>
+        </div>
+      </li>
+    </ol>
+
+    <div class="card check rise" id="checklist">
+      <h3>Seu checklist</h3>
+      <p class="small"><span id="prog-t">0 de 8 concluídos</span> · o progresso fica salvo neste navegador</p>
+      <div class="bar" aria-hidden="true"><i id="prog"></i></div>
+      <ul>
+        <li><label><input type="checkbox" data-i="0"><span>Mapeei as 20 perguntas mais frequentes</span></label></li>
+        <li><label><input type="checkbox" data-i="1"><span>Escrevi o manual do agente</span></label></li>
+        <li><label><input type="checkbox" data-i="2"><span>Montei a base de conhecimento</span></label></li>
+        <li><label><input type="checkbox" data-i="3"><span>Conectei o WhatsApp pela API oficial</span></label></li>
+        <li><label><input type="checkbox" data-i="4"><span>Liguei tudo no n8n ou no Make</span></label></li>
+        <li><label><input type="checkbox" data-i="5"><span>Criei as regras de transferência para humano</span></label></li>
+        <li><label><input type="checkbox" data-i="6"><span>Testei com 30 conversas reais</span></label></li>
+        <li><label><input type="checkbox" data-i="7"><span>Defini as métricas e comecei a medir</span></label></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5. O QUE NINGUÉM TE CONTA ========== -->
+<section id="realidade" aria-labelledby="real-t">
+  <div class="wrap">
+    <h2 class="ed split" id="real-t">O que <b>ninguém</b> te conta</h2>
+    <div class="grid pains" style="margin-top:28px">
+      <div class="card pain rise"><span class="ic" aria-hidden="true">💸</span><h4>Custo de API e mensagens</h4><p>Você paga a IA por uso e a Meta por conversa.</p></div>
+      <div class="card pain rise"><span class="ic" aria-hidden="true">⏱️</span><h4>Horas de configuração</h4><p>Montar, testar e corrigir fluxo toma dias.</p></div>
+      <div class="card pain rise"><span class="ic" aria-hidden="true">✍️</span><h4>Manutenção do prompt</h4><p>Mudou preço ou serviço? Precisa atualizar.</p></div>
+      <div class="card pain rise"><span class="ic" aria-hidden="true">🤖</span><h4>Agente "alucinando"</h4><p>Sem trava, a IA pode inventar um preço.</p></div>
+      <div class="card pain rise"><span class="ic" aria-hidden="true">🔌</span><h4>CRM e agenda</h4><p>Integrar com o que você já usa dá trabalho.</p></div>
+      <div class="card pain rise"><span class="ic" aria-hidden="true">🚫</span><h4>Número bloqueado</h4><p>Um erro de configuração e o número cai.</p></div>
+    </div>
+    <p class="quote rise">Dá para fazer sozinho. Mas leva <em>semanas de tentativa e erro.</em></p>
+  </div>
+</section>
+
+<!-- ========== 6. OFERTA ========== -->
+<section id="oferta" aria-labelledby="oferta-t">
+  <div class="wrap">
+    <div class="offer rise">
+      <p class="eyebrow">Ou deixa que eu implemento pra você</p>
+      <h2 class="ed split" id="oferta-t">Já tenho tudo <b>pronto.</b> Eu coloco o agente rodando na sua empresa.</h2>
+
+      <ul class="benefits">
+        <li><span class="bi" aria-hidden="true">🌙</span>Atende 24 horas, inclusive fim de semana</li>
+        <li><span class="bi" aria-hidden="true">⚡</span>Responde em segundos</li>
+        <li><span class="bi" aria-hidden="true">🎯</span>Qualifica o lead antes de chegar em você</li>
+        <li><span class="bi" aria-hidden="true">📅</span>Agenda e passa para o vendedor na hora certa</li>
+        <li><span class="bi" aria-hidden="true">📊</span>Painel de métricas para acompanhar tudo</li>
+      </ul>
+
+      <p class="eyebrow" style="margin-top:38px">Como funciona</p>
+      <div class="how">
+        <div><b>1</b><span>Diagnóstico rápido no WhatsApp</span></div>
+        <div><b>2</b><span>Eu configuro o agente com a sua base</span></div>
+        <div><b>3</b><span>Agente no ar em <span data-cfg="prazo">[PRAZO_IMPLEMENTACAO]</span></span></div>
+      </div>
+
+      <div class="me">
+        <img src="data:image/webp;base64,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" width="88" height="88" alt="Foto de João Paulo (JP) trabalhando no notebook" loading="lazy" decoding="async">
+        <div><strong>João Paulo (JP) · @jotapeolvr</strong><span>Transformo marketing e tecnologia em lucro. 100+ negócios escalados desde 2021 em 3 países.</span></div>
+      </div>
+
+      <!-- PROVA SOCIAL: só ative quando tiver depoimentos reais. Não invente.
+      <div class="grid" style="margin-top:24px">
+        <blockquote class="card" style="color:#121212">"[DEPOIMENTO]" <cite class="small">[NOME], [EMPRESA]</cite></blockquote>
+      </div>
+      -->
+
+      <div class="price">
+        <p class="p">Investimento</p>
+        <p class="v" data-cfg="preco">Sob consulta</p>
+      </div>
+
+      <a class="btn btn-wa wa" href="#" style="margin-top:18px" data-wa>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+        Quero o agente na minha empresa
+      </a>
+      <p class="micro">Resposta em até <span data-cfg="resposta">[TEMPO_DE_RESPOSTA]</span>. Sem compromisso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. FAQ ========== -->
+<section id="faq" aria-labelledby="faq-t">
+  <div class="wrap">
+    <h2 class="ed split" id="faq-t">Perguntas <b>frequentes</b></h2>
+    <div style="margin-top:24px">
+      <details><summary>Preciso saber programar?</summary><p>Não. Para fazer sozinho, o tutorial usa ferramentas visuais (n8n ou Make), sem código. Se eu implementar, você não mexe em nada técnico: só me passa as informações da empresa.</p></details>
+      <details><summary>Funciona com o WhatsApp que já uso?</summary><p>Funciona com o número da empresa. Pela API oficial, o número precisa ser migrado para a plataforma da Meta. No diagnóstico eu te explico o que muda no seu caso.</p></details>
+      <details><summary>O agente pode errar?</summary><p>Pode, como qualquer atendente. Por isso ele responde só com a base de conhecimento, tem regras do que não pode dizer e passa para um humano quando não tem certeza. E por isso o teste com conversas reais vem antes de ligar para todos.</p></details>
+      <details><summary>Quanto custa manter?</summary><p>Há dois custos de uso: a IA (cobrada por volume de texto) e as conversas da API do WhatsApp (cobradas pela Meta). Para uma pequena empresa costuma ser bem menos que um atendente, mas depende do volume. No diagnóstico eu faço a conta com os seus números.</p></details>
+      <details><summary>E se o cliente quiser falar com uma pessoa?</summary><p>O agente transfere na hora e avisa a sua equipe. Dá para configurar por palavra-chave, reclamação, pedido fechado ou valor.</p></details>
+      <details><summary>Em quanto tempo fica pronto?</summary><p>Fazendo sozinho, depende do seu tempo para estudar e testar, normalmente algumas semanas. Com a minha implementação, o agente fica no ar em <span data-cfg="prazo">[PRAZO_IMPLEMENTACAO]</span>.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8. CTA FINAL ========== -->
+<section id="final" aria-labelledby="final-t">
+  <div class="wrap">
+    <h2 class="ed split" id="final-t">Você não precisa de 900 agentes. Precisa de <b>1</b> no lugar <strong>certo.</strong></h2>
+    <a class="btn btn-wa wa" href="#" style="margin-top:30px" data-wa>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+      Quero o agente na minha empresa
+    </a>
+    <p class="micro" style="color:var(--muted)">Resposta em até <span data-cfg="resposta">[TEMPO_DE_RESPOSTA]</span>. Sem compromisso.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--ink)">João Paulo (JP)</strong> · <a href="https://instagram.com/jotapeolvr" rel="noopener">@jotapeolvr</a></p>
+    <p>Fonte dos dados: Exame, 11/11/2026. A Centauro não tem relação com este conteúdo.</p>
+    <p><a href="[URL_POLITICA_DE_PRIVACIDADE]">Política de privacidade</a></p>
+  </div>
+</footer>
+
+<div class="float" id="float" aria-hidden="true">
+  <a class="btn btn-wa wa" href="#" data-wa tabindex="-1">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+    Quero o agente na minha empresa
+  </a>
+</div>
+
+<script>
+/* ============ CONFIGURAÇÃO: edite só aqui ============ */
+var CONFIG = {
+  whatsapp: "[SEU_WHATSAPP_COM_DDI]",        // ex.: 5592999999999 (só números)
+  pixelId:  "[PIXEL_ID]",                     // ID do Meta Pixel
+  prazo:    "[PRAZO_IMPLEMENTACAO]",          // ex.: 7 dias
+  preco:    "Sob consulta",                   // ou ex.: "A partir de R$ 997/mês"
+  resposta: "[TEMPO_DE_RESPOSTA]",            // ex.: 1 hora
+  mensagem: "Oi, vim pelo vídeo e quero o AGENTE WPP na minha empresa"
+};
+/* ===================================================== */
+
+(function(){
+  var d=document, root=d.documentElement; root.classList.add('js');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isSet = function(v){ return v && v.indexOf('[')!==0; };
+
+  /* Textos configuráveis */
+  d.querySelectorAll('[data-cfg]').forEach(function(el){
+    var v=CONFIG[el.getAttribute('data-cfg')]; if(isSet(v)) el.textContent=v;
+  });
+
+  /* Meta Pixel: PageView ao carregar */
+  if(isSet(CONFIG.pixelId)){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,d,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', CONFIG.pixelId); fbq('track','PageView');
+  }
+  var track=function(ev,p){ if(window.fbq) fbq('track',ev,p||{}); };
+
+  /* UTMs: captura e guarda na sessão */
+  var utm={};
+  try{
+    var q=new URLSearchParams(location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){ if(q.get(k)) utm[k]=q.get(k); });
+    if(Object.keys(utm).length) sessionStorage.setItem('utm',JSON.stringify(utm));
+    else utm=JSON.parse(sessionStorage.getItem('utm')||'{}');
+  }catch(e){}
+
+  /* Links do WhatsApp (com utm_campaign no texto) + evento Lead */
+  var msg=CONFIG.mensagem + (utm.utm_campaign ? ' [' + utm.utm_campaign + ']' : '');
+  var waUrl='https://wa.me/' + String(CONFIG.whatsapp).replace(/\D/g,'') + '?text=' + encodeURIComponent(msg);
+  d.querySelectorAll('[data-wa]').forEach(function(a){
+    a.href=waUrl; a.target='_blank'; a.rel='noopener';
+    a.addEventListener('click',function(){ track('Lead',{content_name:'AGENTE WPP', utm_campaign:utm.utm_campaign||''}); });
+  });
+
+  /* Títulos palavra por palavra */
+  d.querySelectorAll('.split').forEach(function(h){
+    var i=0;
+    (function walk(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(c){
+        if(c.nodeType===3){
+          var frag=d.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(function(t){
+            if(!t) return;
+            if(/^\s+$/.test(t)){ frag.appendChild(d.createTextNode(t)); return; }
+            var s=d.createElement('span'); s.className='w'; s.textContent=t;
+            s.style.transitionDelay=(i++*70)+'ms'; frag.appendChild(s);
+          });
+          c.parentNode.replaceChild(frag,c);
+        } else if(c.nodeType===1){ walk(c); }
+      });
+    })(h);
+  });
+
+  /* Contadores */
+  var count=function(el){
+    var to=+el.getAttribute('data-count');
+    if(reduce){ el.textContent=to.toLocaleString('pt-BR'); return; }
+    var t0=null, dur=1400;
+    (function f(t){ if(!t0)t0=t; var p=Math.min((t-t0)/dur,1), e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(to*e).toLocaleString('pt-BR'); if(p<1) requestAnimationFrame(f); })(performance.now());
+  };
+
+  /* Revelar ao rolar */
+  var targets=d.querySelectorAll('.split,.rise,[data-count]');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var el=e.target;
+        if(el.hasAttribute('data-count')) count(el); else el.classList.add('in');
+        io.unobserve(el);
+      });
+    },{threshold:.2,rootMargin:'0px 0px -6% 0px'});
+    targets.forEach(function(t){ io.observe(t); });
+
+    /* ViewContent ao chegar no tutorial */
+    var vc=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){ track('ViewContent',{content_name:'Tutorial agente WhatsApp'}); vc.disconnect(); }
+    },{threshold:.15});
+    vc.observe(d.getElementById('tutorial'));
+
+    /* Botão flutuante depois do hero */
+    var fl=d.getElementById('float'), flA=fl.querySelector('a');
+    var hi=new IntersectionObserver(function(es){
+      var show=!es[0].isIntersecting;
+      fl.classList.toggle('show',show); fl.setAttribute('aria-hidden',!show); flA.tabIndex=show?0:-1;
+    });
+    hi.observe(d.getElementById('topo'));
+    /* esconde o flutuante quando o CTA da oferta/final já está na tela */
+    var ctaIo=new IntersectionObserver(function(es){
+      var vis=es.some(function(e){return e.isIntersecting;});
+      if(vis) fl.classList.remove('show');
+    });
+    d.querySelectorAll('#oferta [data-wa],#final [data-wa]').forEach(function(b){ ctaIo.observe(b); });
+  } else {
+    targets.forEach(function(t){ t.classList.add('in'); if(t.hasAttribute('data-count')) t.textContent=t.getAttribute('data-count'); });
+  }
+
+  /* Contador VHS */
+  var vt=d.getElementById('vhs-time'), s0=Date.now();
+  var pad=function(n){return (n<10?'0':'')+n;};
+  setInterval(function(){ var s=Math.floor((Date.now()-s0)/1000);
+    vt.textContent=pad(Math.floor(s/3600))+':'+pad(Math.floor(s/60)%60)+':'+pad(s%60); },1000);
+
+  /* Copiar prompt */
+  d.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var pre=d.getElementById(b.getAttribute('data-copy'));
+      var txt=pre.textContent.replace(b.textContent,'').trim();
+      var ok=function(){ b.textContent='Copiado ✓'; setTimeout(function(){b.textContent='Copiar';},2000); };
+      var fallback=function(){
+        var ta=d.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+        d.body.appendChild(ta); ta.select(); try{ d.execCommand('copy'); ok(); }catch(e){ b.textContent='Selecione e copie'; } d.body.removeChild(ta);
+      };
+      if(navigator.clipboard) navigator.clipboard.writeText(txt).then(ok,fallback); else fallback();
+    });
+  });
+
+  /* Checklist com progresso salvo */
+  var KEY='agentewpp_checklist', boxes=d.querySelectorAll('#checklist input'), st=[];
+  try{ st=JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){}
+  var upd=function(){
+    var n=0; boxes.forEach(function(b){ if(b.checked) n++; });
+    d.getElementById('prog').style.width=(n/boxes.length*100)+'%';
+    d.getElementById('prog-t').textContent=n+' de '+boxes.length+' concluídos';
+  };
+  boxes.forEach(function(b,i){
+    b.checked=!!st[i];
+    b.addEventListener('change',function(){
+      st[i]=b.checked; try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){} upd();
+    });
+  });
+  upd();
+})();
+</script>
+</body>
+</html>
